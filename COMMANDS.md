@@ -109,58 +109,26 @@ git push -u origin main
 
 ---
 
-## 7) Deploy options
+## 7) Deploy (Vercel — recommended)
 
-### A) GitHub Pages (quick, no extra services)
-
-Build and publish the `dist/` folder to a `gh-pages` branch using `subtree`:
+Deploy via Vercel CLI (PowerShell-safe, minimal prompts):
 
 ```powershell
 npm run build
-git add dist -f
-git commit -m "build: publish dist"
-git subtree push --prefix dist origin gh-pages
+npm install -g vercel
+vercel login
+vercel link --project pokemonapp --yes
+vercel deploy dist --prod --yes
 ```
 
-- **What it does**: Builds the app, force-adds the `dist/` folder, and pushes it as the `gh-pages` branch. Then, in your GitHub repo settings, enable Pages to serve from `gh-pages`.
+- **What it does**: Builds locally, installs Vercel CLI, logs in, links the current folder to a Vercel project named `pokemonapp`, and deploys the built `dist/` directory to production.
 
-Note: If your repository is NOT a user/organization site and you deploy under `https://YOUR_USER.github.io/pokemonapp/`, set `base` in `vite.config.js` to `"/pokemonapp/"` before building.
+Optional (history-mode routing fallback): add a `vercel.json` so client-side routes work on refresh:
 
-### B) Netlify (requires Netlify account)
-
-```powershell
-npm run build
-npm install -g netlify-cli
-netlify login
-netlify init
-netlify deploy --dir=dist --prod
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
 ```
 
-- **What it does**: Builds the app and uses Netlify CLI to authenticate, set up a site, and deploy the `dist/` folder.
-
----
-
-## 8) What you still need to wire up (no commands)
-
-- Import Bootstrap in `src/main.js` (CSS and optionally JS):
-  - `import 'bootstrap/dist/css/bootstrap.min.css'`
-  - `import 'bootstrap'`
-- Create and register Vue Router and Pinia in `main.js`.
-- Build views and store (list page with search + details page with edit, saving to Pinia).
-- Add loaders during fetch requests and ensure responsive layout with Bootstrap utilities.
-
-These are code edits, not commands, so they’re listed here as reminders.
-
----
-
-## 9) Useful maintenance
-
-Clean install if dependencies act up:
-
-```powershell
-Remove-Item -Recurse -Force node_modules
-Remove-Item -Force package-lock.json
-npm install
-```
-
-- **What it does**: Deletes `node_modules` and lockfile, then reinstalls fresh.
+Alternative: GitHub integration (no CLI deploy). Push your repo to GitHub, then in the Vercel dashboard click “New Project”, import the repo, Framework Preset: Vite, Build Command: `npm run build`, Output Directory: `dist`.
