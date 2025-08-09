@@ -132,3 +132,4 @@ Optional (history-mode routing fallback): add a `vercel.json` so client-side rou
 ```
 
 Alternative: GitHub integration (no CLI deploy). Push your repo to GitHub, then in the Vercel dashboard click “New Project”, import the repo, Framework Preset: Vite, Build Command: `npm run build`, Output Directory: `dist`.
+
