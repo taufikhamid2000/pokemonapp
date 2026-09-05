@@ -2,6 +2,10 @@
 
 A simple responsive Pokémon browser using the public PokeAPI. Features fetching 100 Pokémon, search filter, details page, editable intro stored in Pinia, and loaders.
 
+**Live demo:** https://pokemonapp-pi-five.vercel.app/
+
+> **Status: Archived.** This project is no longer actively maintained. The live demo above stays up, but no further changes are planned.
+
 ## Stack
 
 - Vue 3 (Vite)
