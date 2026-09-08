@@ -2,7 +2,10 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
-        <RouterLink class="navbar-brand" to="/">Pokémon</RouterLink>
+        <RouterLink class="navbar-brand d-flex align-items-center gap-2" to="/">
+          <img src="/favicon.svg" alt="" width="26" height="26" />
+          Pokémon
+        </RouterLink>
       </div>
     </nav>
     <main class="container py-4">
